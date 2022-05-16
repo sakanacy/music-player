@@ -3,13 +3,13 @@
     <!-- 顶部搜索框 -->
     <Search/>
     <!-- 轮播图 -->
-    <Swipe/>
+    <!-- <Swipe/> -->
     <!-- 歌曲排行列表 -->
     <MusicList/>
     <!-- 音乐播放框 -->
     <MinePlayer/>
     <!-- 底部导航栏 -->
-    <Tabbar/>
+    <Tabbar :active="active"/>
   </div>
 </template>
 
@@ -29,8 +29,12 @@ export default {
     MinePlayer,
     Tabbar
   },
+  mounted(){
+  },
   data() {
-    return {};
+    return {
+      active:0,
+    };
   },
 };
 </script>

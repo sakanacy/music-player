@@ -7,7 +7,7 @@
     <!-- 歌手推荐列表 -->
     <SingerList/>
     <!-- 底部导航栏 -->
-    <Tabbar/>
+    <Tabbar :active="active"/>
   </div>
 </template>
 
@@ -24,7 +24,14 @@ Search,
 MusicList,
 Tabbar,
 SingerList,
- }
+ },
+   mounted(){
+  },
+ data() {
+    return {
+      active:1,
+    };
+  },
 }
 </script>
 
