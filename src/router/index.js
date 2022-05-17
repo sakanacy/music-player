@@ -5,13 +5,14 @@ import Home from '../views/Home/index.vue'
 import User from '../views/User/index.vue'
 import Find from '../views/Find/index.vue'
 import Play from '../views/Play/index.vue'
+import SearchPage from '../views/SearchPage/index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path:'/',
-    redirect:'/login',
+    redirect:'/home',
   },
   {
     path:'/login',
@@ -32,6 +33,10 @@ const routes = [
   {
     path:'/play',
     component:Play
+  },
+  {
+    path:'/search',
+    component:SearchPage
   }
 ]
 

@@ -3,7 +3,7 @@
     <!-- 顶部搜索框 -->
     <Search/>
     <!-- 轮播图 -->
-    <!-- <Swipe/> -->
+    <Swipe :imageList="imageList"/>
     <!-- 歌曲排行列表 -->
     <MusicList/>
     <!-- 音乐播放框 -->
@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       active:0,
+      imageList:[],
     };
   },
 };
