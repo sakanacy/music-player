@@ -11,7 +11,7 @@
 <script>
 import { bannerAPI } from "@/api";
 export default {
-  name: "swipe",
+  name: "Swipe",
   async created() {
     // 通过轮播图接口获取图片列表
     const res = await bannerAPI();

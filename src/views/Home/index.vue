@@ -3,11 +3,15 @@
     <!-- 顶部搜索框 -->
     <Search/>
     <!-- 轮播图 -->
-    <Swipe :imageList="imageList"/>
+      <Swipe :imageList="imageList"/>
+    <div id="home-content">
+      
     <!-- 歌曲排行列表 -->
     <MusicList/>
     <!-- 音乐播放框 -->
     <MinePlayer/>
+    </div>
+    
     <!-- 底部导航栏 -->
     <Tabbar :active="active"/>
   </div>
@@ -41,4 +45,7 @@ export default {
 </script>
 
 <style>
+#home-content{
+  position: relative;
+}
 </style>
