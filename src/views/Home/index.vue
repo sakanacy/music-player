@@ -8,12 +8,16 @@
       
     <!-- 歌曲排行列表 -->
     <MusicList/>
-    <!-- 音乐播放框 -->
-    <MinePlayer/>
+    
+    
+    </div>
+    <div id="home-bottom">
+      <!-- 音乐播放框 -->
+      <MinePlayer/>
+      <!-- 底部导航栏 -->
+    <Tabbar :active="active"/>
     </div>
     
-    <!-- 底部导航栏 -->
-    <Tabbar :active="active"/>
   </div>
 </template>
 
@@ -45,7 +49,7 @@ export default {
 </script>
 
 <style>
-#home-content{
+#home-bottom{
   position: relative;
 }
 </style>

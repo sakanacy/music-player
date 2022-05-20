@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 导航栏 -->
-    <van-nav-bar title="登陆" />
+    <van-nav-bar title="登陆" left-arrow  @click-left="goBack" />
     <!-- 登录表单 -->
     <van-form @submit="onSubmit">
       <van-field
@@ -41,6 +41,9 @@ export default {
     onSubmit(values) {
       this.$router.push({path:'/home'})
     },
+    goBack(){
+      this.$router.go(-1);
+    }
   },
 };
 </script>
