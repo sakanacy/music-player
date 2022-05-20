@@ -8,7 +8,9 @@
   height="1rem"
   :src="img"
   @click="gotoPlayer"
-/>
+>
+<template v-slot:error>暂无播放</template>
+      </van-image>
   </van-col>
   <van-col span="5">
       <van-icon name="arrow-left" />
@@ -32,6 +34,8 @@ name:"MinePlayer",
 data(){
     return{
         img:"",
+        isplay:true,
+
     }
 },
 methods:{
