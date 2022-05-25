@@ -13,51 +13,78 @@
         <van-icon color="black" name="arrow-left" size="20" @click="goback()" />
       </template>
     </van-search>
-   <!-- 历史搜索和热门搜索 -->
-    <div id="search-content" v-if="isshow"> 
+    <!-- 历史搜索和热门搜索 -->
+    <div id="search-content" v-if="isshow">
       <!-- 热门搜索 默认显示-->
       <div class="keyword-box">
         <p>热门搜索</p>
-      <ul>
-        <li
-          v-for="(item, index) in hotList"
-          :key="index"
-          @click="keySearch(item.first)"
-        >
-          {{ item.first }}
-        </li>
-      </ul>
-      <br>
-      </div><br>
+        <ul>
+          <li
+            v-for="(item, index) in hotList"
+            :key="index"
+            @click="keySearch(item.first)"
+          >
+            {{ item.first }}
+          </li>
+        </ul>
+        <br />
+      </div>
+      <br />
       <!-- 历史搜索 默认不显示 有搜索记录才显示-->
       <div class="keyword-box" v-show="historyShow">
         <p>历史搜索</p>
-      <ul>
-        <li
-          v-for="(item, index) in historyList"
-          :key="index"
-          @click="keySearch(item)"
-        >
-          {{ item }}
-        </li>
-      </ul>
+        <ul>
+          <li
+            v-for="(item, index) in historyList"
+            :key="index"
+            @click="keySearch(item)"
+          >
+            {{ item }}
+          </li>
+        </ul>
       </div>
     </div>
     <!-- 搜索结果列表 -->
     <div id="result-Content" v-else>
-      <MusicList :ResultList="MusicList" />
+      <van-cell-group>
+        <van-cell
+          v-for="(item, index) in MusicList"
+          :key="index"
+          :title="item.name"
+          :label="item.ar[0].name"
+        >
+          <template #right-icon>
+            <van-icon
+              @click="
+                musicPlay(item.id, item.name, item.ar[0].name, item.al.picUrl)
+              "
+              name="play-circle-o"
+              color="#7b7b7b"
+              size="25px"
+            />
+          </template>
+        </van-cell>
+      </van-cell-group>
     </div>
+    <!-- 底部音乐播放框 -->
+    <MinePlayer
+      id="MinePlayer"
+      :musicId="musicId"
+      :musicname="musicname"
+      :musicPic="musicPic"
+      :singer="singer"
+    />
   </div>
 </template>
 
 <script>
 import { hotSearchAPI, SearchResultAPI } from "@/api";
-import MusicList from "@/components/MusicList.vue";
+import MinePlayer from "@/components/Mine_Player.vue";
 
 export default {
   name: "SearchPage",
   components: {
-    MusicList,
+    MinePlayer,
   },
   data() {
     return {
@@ -66,9 +93,12 @@ export default {
       MusicList: [],
       isshow: true,
       timer: null,
-      historyList:[],
-      historyShow:false,
-
+      historyList: [],
+      historyShow: false,
+      musicId: Number,
+      musicname: "歌名",
+      musicPic: "",
+      singer: "歌手",
     };
   },
   async created() {
@@ -78,10 +108,10 @@ export default {
     this.hotList = res.data.result.hots;
     console.log(this.hotList);
     // 检查是否有历史搜索记录
-     if (localStorage.getItem("historyList") != null){
-        this.historyList=JSON.parse(localStorage.getItem('historyList'));
-        this.historyShow=true;
-     }
+    if (localStorage.getItem("historyList") != null) {
+      this.historyList = JSON.parse(localStorage.getItem("historyList"));
+      this.historyShow = true;
+    }
   },
   methods: {
     // 返回上一页面
@@ -99,19 +129,26 @@ export default {
       this.MusicList = res.data.result.songs;
       // 显示搜索结果
       this.isshow = false;
-      setTimeout(()=>{
+      setTimeout(() => {
         clearTimeout(this.timer);
-      })
+      });
       // 添加历史搜索记录
-          let index=this.historyList.indexOf(keyword)
-          console.log(index)
-          if(index>-1){
-            this.historyList.splice(index,1);
-          }
-          this.historyList.unshift(keyword)
-          localStorage.setItem('historyList',JSON.stringify(this.historyList))
-          this.historyShow=true
-          console.log(this.historyList)
+      let index = this.historyList.indexOf(keyword);
+      if (index > -1) {
+        this.historyList.splice(index, 1);
+      }
+      this.historyList.unshift(keyword);
+      localStorage.setItem("historyList", JSON.stringify(this.historyList));
+      this.historyShow = true;
+      console.log(this.historyList);
+    },
+    // 点击搜索结果,播放器播放对应歌曲
+    musicPlay(id, musicname, singer, musicPic) {
+      console.log(musicPic);
+      this.musicId = id;
+      this.musicname = musicname;
+      this.singer = singer;
+      this.musicPic = musicPic;
     },
   },
   watch: {
@@ -134,13 +171,13 @@ export default {
           // 显示搜索结果
           this.isshow = false;
           // 添加历史搜索记录
-          let index=this.historyList.indexOf(val)
-          if(index>-1){
-            this.historyList.splice(index,1);
+          let index = this.historyList.indexOf(val);
+          if (index > -1) {
+            this.historyList.splice(index, 1);
           }
-          this.historyList.unshift(val)
-          localStorage.setItem('historyList',JSON.stringify(this.historyList))
-          this.historyShow=true
+          this.historyList.unshift(val);
+          localStorage.setItem("historyList", JSON.stringify(this.historyList));
+          this.historyShow = true;
         }, 500);
       }
     },
@@ -148,27 +185,34 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-#search-content{
+<style lang="less" >
+#search-content {
   margin: 0 10px;
 }
-.keyword-box{
+.keyword-box {
   width: 100%;
   overflow: auto;
 }
-.keyword-box p{
+.keyword-box p {
   color: gray;
   font-size: 15px;
 }
-.keyword-box ul{
+.keyword-box ul {
   list-style: none;
 }
-.keyword-box li{
+.keyword-box li {
   float: left;
   margin: 5px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 15px;
   font-size: 15px;
+}
+#MinePlayer {
+  width: 100%;
+  background-color: antiquewhite;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
 }
 </style>

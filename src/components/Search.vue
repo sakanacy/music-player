@@ -1,8 +1,9 @@
 <template>
+  <!-- 顶部搜索框 -->
   <div>
     <van-nav-bar>
       <template #right>
-        <van-icon  color="black" name="search" size="18" @click="gotoSearch()"/>
+        <van-icon color="black" name="search" size="18" @click="gotoSearch()" />
       </template>
     </van-nav-bar>
   </div>
@@ -12,14 +13,13 @@
 export default {
   name: "Search",
   data() {
-    return {
-    };
+    return {};
   },
-  methods:{
-    gotoSearch(){
-      this.$router.push({ path: '/search' });
-    }
-  }
+  methods: {
+    gotoSearch() {
+      this.$router.push({ path: "/search" });
+    },
+  },
 };
 </script>
 

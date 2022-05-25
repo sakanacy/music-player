@@ -9,12 +9,11 @@
     <!-- 歌曲排行列表 -->
     <MusicList/>
     
-    
     </div>
-    <div id="home-bottom">
+    <div id="page-bottom">
       <!-- 音乐播放框 -->
       <MinePlayer/>
-      <!-- 底部导航栏 -->
+    <!-- 底部导航栏 -->
     <Tabbar :active="active"/>
     </div>
     
@@ -49,7 +48,4 @@ export default {
 </script>
 
 <style>
-#home-bottom{
-  position: relative;
-}
 </style>

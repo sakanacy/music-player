@@ -1,54 +1,77 @@
 <template>
   <div id="mine-player-box">
-      <van-row type="flex" justify="space-around">
-  <van-col span="5">
-      <van-image
-  round
-  width="1rem"
-  height="1rem"
-  :src="img"
-  @click="gotoPlayer"
->
-<template v-slot:error>暂无播放</template>
-      </van-image>
-  </van-col>
-  <van-col span="5">
-      <van-icon name="arrow-left" />
-  </van-col>
-  <van-col span="5">
-      <van-icon v-if="isplay" name="play" />
-      <van-icon v-else name="pause" />
-  </van-col>
-  <van-col span="5">
-      <van-icon name="arrow" />
-  </van-col>
-</van-row>
-      
+    <van-cell :icon="musicPic" :title="musicname" :label="singer" @click="gotoPlayer" center>
+      <!-- 右侧播放图标 -->
+      <template #right-icon>
+        <van-icon
+          :name="isplay ? 'pause-circle-o' : 'play-circle-o'"
+          @click="isPlay"
+          size="25px"
+        />
+      </template>
+    </van-cell>
   </div>
 </template>
 
 <script>
-
+import { getSongByIdAPI } from "@/api";
 export default {
-name:"MinePlayer",
-data(){
-    return{
-        img:"",
-        isplay:true,
-
-    }
-},
-methods:{
-    gotoPlayer(){
-        this.$router.push({ path: "/play" });
-    }
-}
-}
+  name: "MinePlayer",
+  props: {
+    musicId: Number,
+    musicPic: String,
+    musicname: {
+      type: String,
+      default: "歌名",
+    },
+    singer: {
+      type: String,
+      default: "歌手",
+    },
+  },
+  data() {
+    return {
+      isplay: true,
+    };
+  },
+  watch: {
+    musicId(val) {
+      console.log("id"+val);
+      console.log("id2"+this.musicId)
+    },
+  },
+  methods: {
+    gotoPlayer() {
+      this.$router.push({
+        path: "/play",
+        query: {
+          id: this.musicId,
+        },
+      });
+    },
+    isPlay() {
+      this.isplay = !this.isplay;
+    },
+  },
+};
 </script>
 
-<style>
-#mine-player-box{
-    text-align: center;
-
+<style lang="less" scoped>
+#mine-player-box {
+  width: 100%;
+  background-color: antiquewhite;
+  text-align: center;
+  position: fixed;
+  bottom: 1.33333rem;
+}
+.van-cell {
+  height: 60px;
+  padding: 0;
+  padding-right:10px;
+  border-top: 1px solid #ebedf09f;
+}
+.van-cell__left-icon{
+  width: 60px;
+  height: 60px;
 }
 </style>

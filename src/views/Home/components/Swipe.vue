@@ -1,4 +1,5 @@
 <template>
+<!-- 轮播图 -->
   <div class="swipe-box">
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">

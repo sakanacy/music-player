@@ -1,4 +1,5 @@
 <template>
+  <!-- 底部导航栏 -->
   <div>
     <van-tabbar v-model="toactive">
       <van-tabbar-item
@@ -16,15 +17,15 @@
 export default {
   name: "Tabbar",
   props: {
-    active: {type:Number,default:0},
+    active: { type: Number, default: 0 },
   },
   data() {
     return {
-        toactive:this.active,
+      toactive: this.active,
       tabbarList: [
-        { icon: "wap-home-o", name: "主页", path: "/home"},
-        { icon: "music-o", name: "发现", path: "/find"},
-        { icon: "contact", name: "账号", path: "/user"},
+        { icon: "wap-home-o", name: "主页", path: "/home" },
+        { icon: "music-o", name: "发现", path: "/find" },
+        { icon: "contact", name: "账号", path: "/user" },
       ],
     };
   },
