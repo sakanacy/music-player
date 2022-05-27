@@ -1,47 +1,36 @@
 <template>
   <div>
-    <!-- 顶部搜索框 -->
-    <Search/>
+    <!-- 顶部导航栏 -->
+    <TopNav/>
     <!-- 轮播图 -->
-      <Swipe :imageList="imageList"/>
-    <div id="home-content">
+  <Swipe/>
+    <div id="home-main">
       
-    <!-- 歌曲排行列表 -->
-    <MusicList/>
     
     </div>
     <div id="page-bottom">
-      <!-- 音乐播放框 -->
-      <MinePlayer/>
     <!-- 底部导航栏 -->
-    <Tabbar :active="active"/>
+    <!-- <Tabbar :active="active"/> -->
     </div>
     
   </div>
 </template>
 
 <script>
-import Swipe from "./components/Swipe.vue"
-import Search from "@/components/Search.vue"
-import MinePlayer from "@/components/Mine_Player.vue"
-import MusicList from "./components/MusicList.vue"
-import Tabbar from "@/components/Tabbar.vue"
+import TopNav from '@/components/TopNav.vue'
+import Swipe from './components/Swipe.vue'
 
 export default {
   name: "Home",
   components: {
-    Swipe,
-    Search,
-    MusicList,
-    MinePlayer,
-    Tabbar
+    TopNav,
+    Swipe
   },
   mounted(){
   },
   data() {
     return {
       active:0,
-      imageList:[],
     };
   },
 };

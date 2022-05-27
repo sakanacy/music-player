@@ -56,7 +56,7 @@
           <template #right-icon>
             <van-icon
               @click="
-                musicPlay(item.id, item.name, item.ar[0].name, item.al.picUrl)
+                musicPlay(item.id)
               "
               name="play-circle-o"
               color="#7b7b7b"
@@ -66,25 +66,16 @@
         </van-cell>
       </van-cell-group>
     </div>
-    <!-- 底部音乐播放框 -->
-    <MinePlayer
-      id="MinePlayer"
-      :musicId="musicId"
-      :musicname="musicname"
-      :musicPic="musicPic"
-      :singer="singer"
-    />
+  
   </div>
 </template>
 
 <script>
 import { hotSearchAPI, SearchResultAPI } from "@/api";
-import MinePlayer from "@/components/Mine_Player.vue";
 
 export default {
-  name: "SearchPage",
+  name: "Search",
   components: {
-    MinePlayer,
   },
   data() {
     return {
@@ -95,10 +86,7 @@ export default {
       timer: null,
       historyList: [],
       historyShow: false,
-      musicId: Number,
-      musicname: "歌名",
-      musicPic: "",
-      singer: "歌手",
+      Id: "",
     };
   },
   async created() {
@@ -143,12 +131,8 @@ export default {
       console.log(this.historyList);
     },
     // 点击搜索结果,播放器播放对应歌曲
-    musicPlay(id, musicname, singer, musicPic) {
-      console.log(musicPic);
-      this.musicId = id;
-      this.musicname = musicname;
-      this.singer = singer;
-      this.musicPic = musicPic;
+    musicPlay(id) {
+      console.log(id);
     },
   },
   watch: {

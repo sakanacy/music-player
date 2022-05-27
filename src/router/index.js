@@ -5,38 +5,46 @@ import Home from '../views/Home/index.vue'
 import User from '../views/User/index.vue'
 import Find from '../views/Find/index.vue'
 import Play from '../views/Play/index.vue'
-import SearchPage from '../views/SearchPage/index.vue'
+import Search from '../views/Search/index.vue'
+import MusicList from '../views/MusicList/index.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path:'/',
-    redirect:'/home',
+    path: '/',
+    redirect: '/home',
   },
   {
-    path:'/login',
-    component:Login
+    path: '/login',
+    component: Login
   },
   {
-    path:'/home',
-    component:Home
+    path: '/home',
+    component: Home,
+    children: [
+      {
+        path: '/home/user',
+        name: "User",
+        component: User,
+      },
+    ]
   },
   {
-    path:'/user',
-    component:User
+    path: '/search',
+    component: Search
   },
   {
-    path:'/find',
-    component:Find
+    path: '/find',
+    component: Find
   },
   {
-    path:'/play',
-    component:Play
+    path: '/play',
+    component: Play
   },
   {
-    path:'/search',
-    component:SearchPage
+    path: '/MusicList',
+    component: MusicList
   }
 ]
 

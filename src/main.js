@@ -5,7 +5,7 @@ import store from './store'
 import axios from 'axios'
 import 'amfe-flexible'
 import 'amfe-flexible/index'
-import { Form,Field,NavBar,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Button,Search,Icon,Image as VanImage,Cell, CellGroup,Col, Row } from 'vant';
+import { Form,Field,NavBar,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Button,Search,Icon,Image as VanImage,Cell, CellGroup,Col, Row} from 'vant';
 
 
 Vue.use(Form);

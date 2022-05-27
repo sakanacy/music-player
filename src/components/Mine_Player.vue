@@ -10,15 +10,20 @@
         />
       </template>
     </van-cell>
+    <audio
+      ref="audio"
+      preload="true"
+      :src="musicLink"
+    ></audio>
   </div>
 </template>
 
 <script>
-import { getSongByIdAPI } from "@/api";
+
 export default {
   name: "MinePlayer",
   props: {
-    musicId: Number,
+    musicId:String,
     musicPic: String,
     musicname: {
       type: String,
@@ -28,29 +33,32 @@ export default {
       type: String,
       default: "歌手",
     },
+    musicLink:""
+    // https://music.163.com/song/media/outer/url?id=1480380026.mp3
   },
   data() {
     return {
       isplay: true,
+      
     };
   },
   watch: {
     musicId(val) {
       console.log("id"+val);
-      console.log("id2"+this.musicId)
     },
   },
   methods: {
     gotoPlayer() {
-      this.$router.push({
-        path: "/play",
-        query: {
-          id: this.musicId,
-        },
-      });
+      // this.$router.push({
+      //   path: "/play",
+      //   query: {
+      //     id: this.musicId,
+      //   },
+      // });
     },
     isPlay() {
       this.isplay = !this.isplay;
+      this.$refs.audio.play()
     },
   },
 };

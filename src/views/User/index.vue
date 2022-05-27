@@ -14,22 +14,14 @@
       <p>{{ userName }}</p>
     </div>
     <div id="page-bottom">
-      <!-- 音乐播放框 -->
-      <MinePlayer />
-      <!-- 底部导航栏 -->
-      <Tabbar :active="active" />
     </div>
   </div>
 </template>
 
 <script>
-import Tabbar from "@/components/Tabbar.vue";
-import MinePlayer from "@/components/Mine_Player.vue"
 export default {
   name: "User",
   components: {
-    Tabbar,
-    MinePlayer,
   },
 
   data() {
