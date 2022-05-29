@@ -46,7 +46,7 @@
     </div>
     <!-- 搜索结果列表 -->
     <div id="result-Content" v-else>
-      <van-cell-group>
+      <!-- <van-cell-group>
         <van-cell
           v-for="(item, index) in MusicList"
           :key="index"
@@ -64,7 +64,8 @@
             />
           </template>
         </van-cell>
-      </van-cell-group>
+      </van-cell-group> -->
+      <MusicItem :MusicList="MusicList"/>
     </div>
   
   </div>
@@ -72,10 +73,11 @@
 
 <script>
 import { hotSearchAPI, SearchResultAPI } from "@/api";
-
+import MusicItem from '@/components/MusicItem.vue'
 export default {
   name: "Search",
   components: {
+    MusicItem,
   },
   data() {
     return {
@@ -113,9 +115,10 @@ export default {
         type: 1,
         keywords: keyword,
       });
+      // 搜索结果
       console.log(res);
       this.MusicList = res.data.result.songs;
-      // 显示搜索结果
+      // 显示搜索结果列表
       this.isshow = false;
       setTimeout(() => {
         clearTimeout(this.timer);
@@ -128,11 +131,11 @@ export default {
       this.historyList.unshift(keyword);
       localStorage.setItem("historyList", JSON.stringify(this.historyList));
       this.historyShow = true;
-      console.log(this.historyList);
+      // 查看历史记录状态
+      // console.log(this.historyList);
     },
     // 点击搜索结果,播放器播放对应歌曲
     musicPlay(id) {
-      console.log(id);
     },
   },
   watch: {
@@ -191,12 +194,5 @@ export default {
   border: 1px solid #ccc;
   border-radius: 15px;
   font-size: 15px;
-}
-#MinePlayer {
-  width: 100%;
-  background-color: antiquewhite;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
 }
 </style>

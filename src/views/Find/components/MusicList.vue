@@ -18,6 +18,7 @@
                 width="100%"
                 fit="contain"
                 :src="item.picUrl"
+                radius="10"
               />
               <span class="van-multi-ellipsis--l2">{{ item.name }}</span>
             </div>

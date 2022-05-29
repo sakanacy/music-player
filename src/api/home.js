@@ -6,3 +6,8 @@ export const banner = params => request({
     url:"/banner?type=2",
     params
 })
+// 获取每日新歌
+export const getNewSong = params =>request({
+    url:"/personalized/newsong",
+    params
+})

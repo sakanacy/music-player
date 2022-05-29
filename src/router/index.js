@@ -6,7 +6,7 @@ import User from '../views/User/index.vue'
 import Find from '../views/Find/index.vue'
 import Play from '../views/Play/index.vue'
 import Search from '../views/Search/index.vue'
-import MusicList from '../views/MusicList/index.vue'
+import MusicList from '../views/MusicItemList/index.vue'
 
 Vue.use(VueRouter)
 
