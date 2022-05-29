@@ -46,25 +46,6 @@
     </div>
     <!-- 搜索结果列表 -->
     <div id="result-Content" v-else>
-      <!-- <van-cell-group>
-        <van-cell
-          v-for="(item, index) in MusicList"
-          :key="index"
-          :title="item.name"
-          :label="item.ar[0].name"
-        >
-          <template #right-icon>
-            <van-icon
-              @click="
-                musicPlay(item.id)
-              "
-              name="play-circle-o"
-              color="#7b7b7b"
-              size="25px"
-            />
-          </template>
-        </van-cell>
-      </van-cell-group> -->
       <MusicItem :MusicList="MusicList"/>
     </div>
   
@@ -83,6 +64,7 @@ export default {
     return {
       searchValue: "",
       hotList: [],
+      SingerList:[],
       MusicList: [],
       isshow: true,
       timer: null,
@@ -109,15 +91,25 @@ export default {
       this.$router.go(-1);
     },
     // 点击已有搜索关键字 直接搜索
+    
     async keySearch(keyword) {
       this.searchValue = keyword;
+      // 搜索歌曲
       const res = await SearchResultAPI({
         type: 1,
         keywords: keyword,
       });
+      // 搜索歌手
+      const singers = await SearchResultAPI({
+        type: 100,
+        keywords: keyword,
+      });
       // 搜索结果
       console.log(res);
+      console.log(singers)
       this.MusicList = res.data.result.songs;
+      // !!!!!!!!!没写完
+      // this.SingerList =singers.data.
       // 显示搜索结果列表
       this.isshow = false;
       setTimeout(() => {
