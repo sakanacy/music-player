@@ -12,12 +12,7 @@
   <van-col class="newSong-more" span="3">更多></van-col>
 </van-row>
         </div>
-        
       <div class="newSong-box">
-        <div class="newSong-playAll" @click="playAll">
-          <van-icon name="play-circle-o" size="20px" />
-          <span>播放全部</span>
-        </div>
         <MusicItem :MusicList="newSongs" />
       </div>
     </div>
@@ -86,17 +81,7 @@ export default {
     background-color: white;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-    .newSong-playAll {
-      padding: 5px 16px;
-      padding-top: 10px;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-
-      span {
-        padding: 5px;
-      }
-    }
+   
   }
 }
 </style>

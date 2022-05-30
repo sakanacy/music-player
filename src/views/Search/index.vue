@@ -30,9 +30,17 @@
         <br />
       </div>
       <br />
-      <!-- 历史搜索 默认不显示 有搜索记录才显示-->
-      <div class="keyword-box" v-show="historyShow">
-        <p>历史搜索</p>
+      <!-- 历史搜索-->
+      <div class="keyword-box">
+        <van-row type="flex" justify="space-between" align="center">
+          <van-col span="5"><p>历史搜索</p> </van-col>
+          <van-col span="4">
+            <van-button type="default" size="mini"  round @click="historyClear">
+              清除记录
+            </van-button>
+            </van-col>
+        </van-row>
+
         <ul>
           <li
             v-for="(item, index) in historyList"
@@ -46,18 +54,30 @@
     </div>
     <!-- 搜索结果列表 -->
     <div id="result-Content" v-else>
+<<<<<<< HEAD
       <MusicItem :MusicList="MusicList"/>
+=======
+      <van-tabs>
+        <van-tab title="单曲">
+          <MusicItem :MusicList="MusicList" />
+        </van-tab>
+        <van-tab title="歌手">
+          <SingerItem :SingerList="SingerList" />
+        </van-tab>
+      </van-tabs>
+>>>>>>> e83dddd (新增歌手搜索、歌手页面)
     </div>
-  
   </div>
 </template>
 
 <script>
 import { hotSearchAPI, SearchResultAPI } from "@/api";
-import MusicItem from '@/components/MusicItem.vue'
+import MusicItem from "@/components/MusicItem.vue";
+import SingerItem from "@/components/SingerItem.vue";
 export default {
   name: "Search",
   components: {
+    SingerItem,
     MusicItem,
   },
   data() {
@@ -69,8 +89,8 @@ export default {
       isshow: true,
       timer: null,
       historyList: [],
-      historyShow: false,
       Id: "",
+      SingerList: [],
     };
   },
   async created() {
@@ -82,7 +102,6 @@ export default {
     // 检查是否有历史搜索记录
     if (localStorage.getItem("historyList") != null) {
       this.historyList = JSON.parse(localStorage.getItem("historyList"));
-      this.historyShow = true;
     }
   },
   methods: {
@@ -105,11 +124,19 @@ export default {
         keywords: keyword,
       });
       // 搜索结果
+      console.log("歌曲搜索");
       console.log(res);
+<<<<<<< HEAD
       console.log(singers)
       this.MusicList = res.data.result.songs;
       // !!!!!!!!!没写完
       // this.SingerList =singers.data.
+=======
+      console.log("歌手搜索");
+      console.log(singers);
+      this.MusicList = res.data.result.songs;
+      this.SingerList = singers.data.result.artists;
+>>>>>>> e83dddd (新增歌手搜索、歌手页面)
       // 显示搜索结果列表
       this.isshow = false;
       setTimeout(() => {
@@ -122,13 +149,14 @@ export default {
       }
       this.historyList.unshift(keyword);
       localStorage.setItem("historyList", JSON.stringify(this.historyList));
-      this.historyShow = true;
       // 查看历史记录状态
       // console.log(this.historyList);
     },
-    // 点击搜索结果,播放器播放对应歌曲
-    musicPlay(id) {
-    },
+    // 清除历史记录
+    historyClear(){
+        this.historyList=[];
+        localStorage.removeItem("historyList")
+      }
   },
   watch: {
     searchValue(val) {
@@ -140,13 +168,19 @@ export default {
       } else {
         // 防抖
         this.timer = setTimeout(async () => {
-          // 获取搜索结果
+          // 搜索歌曲
           const res = await SearchResultAPI({
             type: 1,
             keywords: val,
           });
-          console.log(res);
+          // 搜索歌手
+          const singers = await SearchResultAPI({
+            type: 100,
+            keywords: val,
+          });
+          // 搜索结果
           this.MusicList = res.data.result.songs;
+          this.SingerList = singers.data.result.artists;
           // 显示搜索结果
           this.isshow = false;
           // 添加历史搜索记录
@@ -156,7 +190,6 @@ export default {
           }
           this.historyList.unshift(val);
           localStorage.setItem("historyList", JSON.stringify(this.historyList));
-          this.historyShow = true;
         }, 500);
       }
     },

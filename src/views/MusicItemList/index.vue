@@ -36,10 +36,6 @@
       </div>
       <!-- 歌曲列表 -->
       <div class="MusicItem-box">
-        <div class="MusicItem-playAll" @click="playAll">
-          <van-icon name="play-circle-o" size="20px" />
-          <span>播放全部</span>
-        </div>
         <MusicItem :MusicList="songs" />
       </div>
     </div>
@@ -74,10 +70,6 @@ export default {
       console.log(res);
       this.songs = res.data.songs;
     },
-    // 播放所有歌曲
-    playAll(){
-
-    }
   },
   mounted() {
     this.getMusicItemList(this.id);
@@ -130,16 +122,5 @@ export default {
   background-color: white;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  .MusicItem-playAll {
-    padding: 5px 16px;
-    padding-top: 10px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-
-    span {
-      padding: 5px;
-    }
-  }
 }
 </style>
