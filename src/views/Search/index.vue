@@ -54,9 +54,6 @@
     </div>
     <!-- 搜索结果列表 -->
     <div id="result-Content" v-else>
-<<<<<<< HEAD
-      <MusicItem :MusicList="MusicList"/>
-=======
       <van-tabs>
         <van-tab title="单曲">
           <MusicItem :MusicList="MusicList" />
@@ -65,7 +62,6 @@
           <SingerItem :SingerList="SingerList" />
         </van-tab>
       </van-tabs>
->>>>>>> e83dddd (新增歌手搜索、歌手页面)
     </div>
   </div>
 </template>
@@ -126,17 +122,10 @@ export default {
       // 搜索结果
       console.log("歌曲搜索");
       console.log(res);
-<<<<<<< HEAD
-      console.log(singers)
-      this.MusicList = res.data.result.songs;
-      // !!!!!!!!!没写完
-      // this.SingerList =singers.data.
-=======
       console.log("歌手搜索");
       console.log(singers);
       this.MusicList = res.data.result.songs;
       this.SingerList = singers.data.result.artists;
->>>>>>> e83dddd (新增歌手搜索、歌手页面)
       // 显示搜索结果列表
       this.isshow = false;
       setTimeout(() => {

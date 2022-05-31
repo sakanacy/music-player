@@ -4,7 +4,6 @@ import Login from '../views/Login/index.vue'
 import Home from '../views/Home/index.vue'
 import User from '../views/User/index.vue'
 import Find from '../views/Find/index.vue'
-import Play from '../views/Play/index.vue'
 import Search from '../views/Search/index.vue'
 import MusicList from '../views/MusicItemList/index.vue'
 import Singer from '../views/Singer/index.vue'
@@ -21,15 +20,12 @@ const routes = [
     component: Login
   },
   {
+    path: '/user',
+    component: User,
+  },
+  {
     path: '/home',
     component: Home,
-    children: [
-      {
-        path: '/home/user',
-        name: "User",
-        component: User,
-      },
-    ]
   },
   {
     path: '/search',
@@ -38,10 +34,6 @@ const routes = [
   {
     path: '/find',
     component: Find
-  },
-  {
-    path: '/play',
-    component: Play
   },
   {
     path: '/MusicList',

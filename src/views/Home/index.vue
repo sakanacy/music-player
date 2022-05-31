@@ -18,8 +18,6 @@
     </div>
 
     <div id="page-bottom">
-      <!-- 底部导航栏 -->
-      <!-- <Tabbar :active="active"/> -->
     </div>
   </div>
 </template>
@@ -52,7 +50,8 @@ export default {
         let id = item.id;
         let name = item.name;
         let ar = [{ name: item.song.artists[0].name }];
-        this.newSongs.push({ id, name, ar });
+        let al ={picUrl:item.picUrl}
+        this.newSongs.push({ id, name, ar,al });
       });
       console.log(this.newSongs);
     },

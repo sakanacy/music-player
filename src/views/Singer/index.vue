@@ -25,17 +25,21 @@
       </van-row>
     </div>
     <!-- 歌手相关信息 -->
+    <div class="singer-info">
     <van-tabs>
       <van-tab title="热门单曲">
           <MusicItem :MusicList="songsList" />
       </van-tab>
       <van-tab title="歌手简介">
-          
+          <div>
+            <span>{{detail.briefDesc}}</span>
+          </div>
       </van-tab>
       <van-tab title="相似歌手">
           <SingerItem :SingerList="simiSinger" />
       </van-tab>
     </van-tabs>
+  </div>
   </div>
 </template>
 
@@ -79,7 +83,7 @@ SingerItem,
     async getSimiSinger() {
       let res = await getSimiSingerAPI(this.id);
       // 相似歌手
-      console.log("歌手");
+      console.log("相似歌手");
       console.log(res);
       this.simiSinger = res.data.artists;
     },
@@ -124,5 +128,10 @@ SingerItem,
     color: rgb(200, 200, 200);
     font-size: 15px;
   }
+}
+.singer-info{
+  background-color: white;
+  color: gray;
+  font-size: 20px;
 }
 </style>

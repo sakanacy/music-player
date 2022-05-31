@@ -118,9 +118,5 @@ export default {
     font-size: 13px;
   }
 }
-.MusicItem-box {
-  background-color: white;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
+
 </style>

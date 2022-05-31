@@ -5,7 +5,7 @@ import store from './store'
 import axios from 'axios'
 import 'amfe-flexible'
 import 'amfe-flexible/index'
-import { Tab, Tabs,Form,Field,NavBar,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Button,Search,Icon,Image as VanImage,Cell, CellGroup,Col, Row} from 'vant';
+import { Tab, Tabs,Form,Field,NavBar,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Button,Search,Icon,Image as VanImage,Cell, CellGroup,Col, Row,Popup} from 'vant';
 
 
 Vue.use(Form);
@@ -27,6 +27,7 @@ Vue.use(Col);
 Vue.use(Row);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Popup);
 
 Vue.config.productionTip = false
 Vue.prototype.axios=axios
