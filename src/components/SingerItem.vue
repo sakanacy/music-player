@@ -1,7 +1,7 @@
 <template>
   <div class="Singer-box">
     <div
-      class="Singer-item van-hairline--top"
+      class="Singer-item van-hairline--top singerItem-scroll"
       v-for="(item, index) in SingerList"
       :key="index"
       @click="gotoSinger(item.id)"
@@ -34,6 +34,26 @@ console.log(this.SingerList)
         }
       })
     },
+  },
+  mounted(){
+  // 滚动出现动画效果
+  window.addEventListener("scroll", this.scrollArea);
+    this.$scrollReveal.reveal(".singerItem-scroll", {
+      duration: 500,
+      delay: 200,
+      origin: "bottom",
+      // 回滚的时候是否再次触发动画
+      reset: false,
+      // 在移动端是否使用动画
+      mobile: true,
+      distance: "10px",
+      opacity: 0.001,
+      easing: "linear",
+      scale: 0.9,
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollArea);
   },
 };
 </script>

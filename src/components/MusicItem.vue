@@ -10,6 +10,7 @@
         :key="index"
         :title="item.name"
         :label="item.ar[0].name"
+        class="musicItem-scroll"
       >
         <template #right-icon>
           <!-- 播放图标 -->
@@ -62,6 +63,26 @@ export default {
       this.updateIsPlay(true);
       this.isplayAll = true;
     },
+  },
+  mounted(){
+  // 滚动出现动画效果
+  window.addEventListener("scroll", this.scrollArea);
+    this.$scrollReveal.reveal(".musicItem-scroll", {
+      duration: 500,
+      delay: 200,
+      origin: "bottom",
+      // 回滚的时候是否再次触发动画
+      reset: false,
+      // 在移动端是否使用动画
+      mobile: true,
+      distance: "10px",
+      opacity: 0.001,
+      easing: "linear",
+      scale: 0.9,
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.scrollArea);
   },
 };
 </script>

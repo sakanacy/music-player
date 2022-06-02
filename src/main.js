@@ -6,7 +6,8 @@ import axios from 'axios'
 import 'amfe-flexible'
 import 'amfe-flexible/index'
 import { Tab, Tabs,Form,Field,NavBar,Tabbar, TabbarItem,Swipe, SwipeItem,Lazyload,Button,Search,Icon,Image as VanImage,Cell, CellGroup,Col, Row,Popup} from 'vant';
-
+// 导入scrillReveal组件
+import scrollReveal from 'scrollreveal'
 
 Vue.use(Form);
 Vue.use(Field);
@@ -31,7 +32,7 @@ Vue.use(Popup);
 
 Vue.config.productionTip = false
 Vue.prototype.axios=axios
-
+Vue.prototype.$scrollReveal = scrollReveal();
 
 new Vue({
   router,

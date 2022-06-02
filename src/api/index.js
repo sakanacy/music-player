@@ -25,3 +25,5 @@ export const getSingerSongsAPI=getSingerSongs
 export const getSingerDetailAPI=getSingerDetail
 // 获取相似歌手
 export const getSimiSingerAPI=getSimiSinger
+// 获取歌曲歌词
+export const getLyricByIdAPI=getLyricById

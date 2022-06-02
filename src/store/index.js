@@ -16,6 +16,7 @@ export default new Vuex.Store({
     playListIndex:0,
     isPlay:false,
     playerShow:false,
+    playercurrentTime:0,
   },
   getters: {
   },
@@ -32,8 +33,11 @@ export default new Vuex.Store({
     addplayList(state,value){
       state.playList.push(value)
     },
-    updateplayerShow(state,value){
-      state.playerShow=value
+    updateplayerShow(state){
+      state.playerShow=!state.playerShow
+    },
+    updateplayercurrentTime(state,value){
+      state.playercurrentTime=value
     }
   },
   actions: {
