@@ -25,6 +25,7 @@
         :src="`https://music.163.com/song/media/outer/url?id=${playList[playListIndex].id}.mp3`"
         @timeupdate="updateTime"
         @ended="playEnd"
+        @canplay="updatemusicTime"
       ></audio>
     </div>
     <!-- 歌曲播放页面，底部弹出层实现 -->
@@ -38,7 +39,6 @@
         <MusicPlayer
           :musicList="playList[playListIndex]"
           :songPlay="songPlay"
-          :updatemusicTime="updatemusicTime"
         />
       </van-popup>
     </div>
@@ -100,10 +100,8 @@ export default {
       // console.log(this.playercurrentTime)
     },
     // 返回歌曲总时长
-    updatemusicTime() {
+     updatemusicTime() {
       this.updatemusicduration(this.$refs.audio.duration);
-      // 测试当前歌曲总时长
-      // console.log(this.musicduration)
     },
     // 歌曲播放结束自动播放下一首，播放结束显示暂停
     playEnd() {

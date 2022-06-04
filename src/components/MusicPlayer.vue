@@ -101,7 +101,6 @@ export default {
     musicList: List,
     songPlay: Function,
     updateTime: Function,
-    updatemusicTime: Function,
   },
   data() {
     return {
@@ -178,13 +177,11 @@ export default {
   },
   mounted() {
     this.getLyricById(this.musicList.id);
-    this.updatemusicTime();
   },
   watch: {
-    // 当前播放歌曲改变，重新获取歌词和歌曲总时长
+    // 当前播放歌曲改变，重新获取歌词
     musicList(val) {
       this.getLyricById(val.id);
-      this.updatemusicTime();
     },
     // 歌词滚动效果实现
     playercurrentTime() {
