@@ -1,35 +1,40 @@
 <template>
-  <div class="topNav-box van-hairline--bottom" >
-    <van-row type="flex" justify="space-between" size="20px">
-      <van-col span="3"><van-icon name="ellipsis" /></van-col>
-      <van-col span="3" class="active" >主页</van-col>
-      <van-col span="3">发现</van-col>
-      <van-col span="3">我的</van-col>
-      <van-col span="3"><van-icon name="search" size="20px" @click="gotoSearch()"/></van-col>
-    </van-row>
+  <!-- 顶部标题栏 -->
+  <div class="van-hairline--bottom topTab">
+    <van-tabs
+      v-model="active"
+      title-inactive-color="black"
+      title-active-color="red"
+      line-width="0"
+      line-height="0"
+    >
+      <van-tab title="首页" to="/home" > </van-tab>
+      <van-tab title="发现" to="/find" > </van-tab>
+      <van-tab to="/search">
+        <template #title> <van-icon name="search" size="20px" /></template>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
 <script>
 export default {
-    name:"TopNav",
-      methods: {
-    gotoSearch() {
-      this.$router.push({ path: "/search" });
-    },
+  name: "TopNav",
+  props: {
+    index: Number,
   },
-
+  data() {
+    return {
+      active: this.index,
+    };
+  },
+  methods: {},
 };
 </script>
 
 <style lang="less" scoped>
-.topNav-box{
-    padding: 8px;
-
-    text-align: center;
-    font-size: 17px;
-    .active{
-        font-weight: bold;
-    }
+.van-tabs__nav.van-tabs__nav--line{
+  padding-bottom: 0 !important;
 }
+
 </style>

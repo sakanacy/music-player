@@ -1,7 +1,7 @@
 import { banner,getNewSong } from '@/api/home'
 import { hotSearch, SearchResult } from '@/api/search'
 import { getSongById, getLyricById } from '@/api/play'
-import { recommendMusicList,getMusicItemList,getMusicListMusic} from '@/api/find'
+import { recommendMusicList,getMusicItemList,getMusicListMusic,getSingerTopList} from '@/api/find'
 import {getSingerSongs,getSingerDetail,getSimiSinger} from '@/api/singer'
 // 获取轮播图
 export const bannerAPI = banner
@@ -27,3 +27,5 @@ export const getSingerDetailAPI=getSingerDetail
 export const getSimiSingerAPI=getSimiSinger
 // 获取歌曲歌词
 export const getLyricByIdAPI=getLyricById
+// 获取歌手榜单
+export const getSingerTopListAPI=getSingerTopList

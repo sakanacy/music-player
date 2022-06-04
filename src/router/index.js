@@ -15,10 +15,12 @@ const routes = [
     path: '/',
     redirect: '/home',
   },
+  // 未实现
   {
     path: '/login',
     component: Login
   },
+  // 未实现
   {
     path: '/user',
     component: User,

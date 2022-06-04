@@ -26,20 +26,20 @@
     </div>
     <!-- 歌手相关信息 -->
     <div class="singer-info">
-    <van-tabs>
-      <van-tab title="热门单曲">
+      <van-tabs>
+        <van-tab title="热门单曲">
           <MusicItem :MusicList="songsList" />
-      </van-tab>
-      <van-tab title="歌手简介">
+        </van-tab>
+        <van-tab title="歌手简介">
           <div>
-            <span>{{detail.briefDesc}}</span>
+            <span>{{ detail.briefDesc }}</span>
           </div>
-      </van-tab>
-      <van-tab title="相似歌手">
+        </van-tab>
+        <van-tab title="相似歌手">
           <SingerItem :SingerList="simiSinger" />
-      </van-tab>
-    </van-tabs>
-  </div>
+        </van-tab>
+      </van-tabs>
+    </div>
   </div>
 </template>
 
@@ -49,13 +49,13 @@ import {
   getSingerDetailAPI,
   getSimiSingerAPI,
 } from "@/api/index";
-import MusicItem from '@/components/MusicItem.vue'
-import SingerItem from '@/components/SingerItem.vue'
+import MusicItem from "@/components/MusicItem.vue";
+import SingerItem from "@/components/SingerItem.vue";
 export default {
   name: "Singer",
-  components:{
-MusicItem,
-SingerItem,
+  components: {
+    MusicItem,
+    SingerItem,
   },
   data() {
     return {
@@ -66,25 +66,25 @@ SingerItem,
     };
   },
   methods: {
+    // 获取歌手热门歌曲
     async getSingerSongs() {
       let res = await getSingerSongsAPI(this.id);
-      // 歌手热门歌曲
-      console.log("热门歌曲");
-      console.log(res);
+      // console.log("热门歌曲");
+      // console.log(res);
       this.songsList = res.data.songs;
     },
+    // 获取歌手详情
     async getSingerDetail() {
       let res = await getSingerDetailAPI(this.id);
-      // 歌手详情
-      console.log("详情");
-      console.log(res);
+      // console.log("详情");
+      // console.log(res);
       this.detail = res.data.data.artist;
     },
+    // 获取相似歌手
     async getSimiSinger() {
       let res = await getSimiSingerAPI(this.id);
-      // 相似歌手
-      console.log("相似歌手");
-      console.log(res);
+      // console.log("相似歌手");
+      // console.log(res);
       this.simiSinger = res.data.artists;
     },
   },
@@ -93,7 +93,7 @@ SingerItem,
     this.getSingerDetail();
     this.getSimiSinger();
   },
-    watch: {
+  watch: {
     // 路由刷新
     $route(to, from) {
       this.$router.go(0);
@@ -129,7 +129,7 @@ SingerItem,
     font-size: 15px;
   }
 }
-.singer-info{
+.singer-info {
   background-color: white;
   color: gray;
   font-size: 20px;

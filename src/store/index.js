@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    // 播放歌曲列表
     playList:[
       {
         id:"1413863166",
@@ -13,10 +14,16 @@ export default new Vuex.Store({
         al:{picUrl:"http://p4.music.126.net/sLWN-iePq4ESOMPER0IWgQ==/109951164602081973.jpg"}
       }
     ],
+    // 当前播放歌曲
     playListIndex:0,
+    // 是否播放
     isPlay:false,
+    // 歌曲播放页面是否显示
     playerShow:false,
+    // 歌曲当前播放时间
     playercurrentTime:0,
+    // 当前播放歌曲总时长
+    musicduration:0,
   },
   getters: {
   },
@@ -38,6 +45,9 @@ export default new Vuex.Store({
     },
     updateplayercurrentTime(state,value){
       state.playercurrentTime=value
+    },
+    updatemusicduration(state,value){
+      state.musicduration=value
     }
   },
   actions: {

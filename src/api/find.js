@@ -16,3 +16,8 @@ export const getMusicListMusic = (id) => request({
     method: "GET",
     url: `/playlist/track/all?id=${id}&limit=10&offset=1`
 })
+// 获取歌手榜单
+export const getSingerTopList = params => request({
+    url:"/toplist/artist",
+    params
+})

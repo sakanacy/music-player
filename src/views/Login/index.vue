@@ -1,4 +1,5 @@
 <template>
+<!-- 简单实现，暂未使用 -->
   <div>
     <!-- 导航栏 -->
     <van-nav-bar title="登陆" left-arrow  @click-left="goBack" />

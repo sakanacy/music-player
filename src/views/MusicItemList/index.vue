@@ -1,4 +1,5 @@
 <template>
+  <!-- 歌单详情页面 -->
   <div>
     <div class="List-top">
       <!-- 背景图片 -->
@@ -8,6 +9,7 @@
       <!-- 歌单详情 -->
       <div class="List-top-info">
         <van-row type="flex" justify="space-between" gutter="8">
+          <!-- 歌单图片 -->
           <van-col span="8">
             <van-image
               width="100%"
@@ -16,6 +18,7 @@
               radius="10"
             />
           </van-col>
+          <!-- 歌单信息 -->
           <van-col span="16">
             <p>{{ playlist.name }}</p>
             <span class="creatorContent" v-if="playlist.creator">
@@ -58,16 +61,18 @@ export default {
     };
   },
   methods: {
+    // 获取当前歌单详情
     async getMusicItemList(id) {
       let res = await getMusicItemListAPI(id);
-      console.log("歌单详情");
-      console.log(res);
+      // console.log("歌单详情");
+      // console.log(res);
       this.playlist = res.data.playlist;
     },
+    // 获取歌单的歌曲列表
     async getMusicListMusic(id) {
       let res = await getMusicListMusicAPI(id);
-      console.log("歌单列表歌曲");
-      console.log(res);
+      // console.log("歌单列表歌曲");
+      // console.log(res);
       this.songs = res.data.songs;
     },
   },
@@ -118,5 +123,4 @@ export default {
     font-size: 13px;
   }
 }
-
 </style>

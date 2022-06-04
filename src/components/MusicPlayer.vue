@@ -8,6 +8,7 @@
         <van-icon name="arrow-down" size="25px" />
       </div>
     </van-nav-bar>
+    <!-- 显示歌曲名、歌手名 -->
     <div class="music-box">
       <div class="music-title">
         <p>{{ musicList.name }}</p>
@@ -24,8 +25,9 @@
           radius="5"
           @click="isImgShow"
         />
-        <!-- 歌词 -->
+        <!-- 歌词，和歌曲图片互斥显示-->
         <div class="music-lyric" @click="isImgShow" v-else ref="musicLrc">
+          <!-- 循环显示歌词，当前播放文字高亮显示 -->
           <p
             v-for="(item, index) in lyricList"
             :key="index"
@@ -40,7 +42,20 @@
         </div>
       </div>
     </div>
+    <!-- 底部部件 -->
     <div class="music-bottom">
+      <!-- 进度条 -->
+      <div class="music-range-box">
+        <input
+          type="range"
+          class="music-range"
+          min="0"
+          :max="musicduration"
+          v-model="playercurrentTime"
+          step="0.02"
+        />
+      </div>
+      <!-- 播放等按钮 -->
       <van-row type="flex" justify="center" align="center">
         <van-col span="7">
           <van-icon
@@ -86,6 +101,7 @@ export default {
     musicList: List,
     songPlay: Function,
     updateTime: Function,
+    updatemusicTime: Function,
   },
   data() {
     return {
@@ -94,11 +110,18 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isPlay", "playListIndex", "playList", "playercurrentTime"]),
+    ...mapState([
+      "isPlay",
+      "playListIndex",
+      "playList",
+      "playercurrentTime",
+      "musicduration",
+    ]),
+    // 歌词列表
     lyricList() {
       let lyric;
       if (this.lyricItem) {
-        lyric = this.lyricItem.split(/[(\r\n)\r\n]+/).map((item, i) => {
+        lyric = this.lyricItem.split(/[\r\n\r\n]+/).map((item, i) => {
           let min = item.slice(1, 3);
           let sec = item.slice(4, 6);
           let mill = item.slice(7, 10);
@@ -115,8 +138,8 @@ export default {
         });
       }
       lyric.forEach((item, i) => {
-        if (i === lyric.length - 1) {
-          item.pre = 0;
+        if (i === lyric.length - 1 || isNaN(lyric[i + 1].time)) {
+          item.pre = 100000;
         } else {
           item.pre = lyric[i + 1].time;
         }
@@ -129,12 +152,14 @@ export default {
     isImgShow() {
       this.imgShow = !this.imgShow;
     },
+    // 接口获取歌词
     async getLyricById(id) {
       let res = await getLyricByIdAPI(id);
-      console.log("歌词");
       this.lyricItem = res.data.lrc.lyric;
-      console.log(this.lyricItem);
+      // 测试是否获取到歌词
+      // console.log(this.lyricItem);
     },
+    // 播放下一首
     playNextSong() {
       if (this.playListIndex == this.playList.length - 1) {
         this.updateplayListIndex(0);
@@ -142,6 +167,7 @@ export default {
         this.updateplayListIndex(this.playListIndex + 1);
       }
     },
+    // 播放上一首
     playLastSong() {
       if (this.playListIndex == 0) {
         this.updateplayListIndex(this.playList.length - 1);
@@ -152,15 +178,21 @@ export default {
   },
   mounted() {
     this.getLyricById(this.musicList.id);
+    this.updatemusicTime();
   },
   watch: {
+    // 当前播放歌曲改变，重新获取歌词和歌曲总时长
     musicList(val) {
       this.getLyricById(val.id);
+      this.updatemusicTime();
     },
+    // 歌词滚动效果实现
     playercurrentTime() {
       let p = document.querySelector("p.active");
+      // 测试获取到的p标签
+      // console.log([p]);
       if (!this.imgShow) {
-        if (p.offsetTop >= 300) {
+        if (p != null && p.offsetTop >= 300) {
           this.$refs.musicLrc.scrollTop = p.offsetTop - 300;
         }
       }
@@ -224,6 +256,20 @@ export default {
   }
 }
 .music-bottom {
+  position: absolute;
+  height: 90px;
+  width: 100%;
+  bottom: 0;
+  margin: 10px 0;
   text-align: center;
+  .music-range-box {
+    padding: 10px 0;
+    .music-range {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      height: 3px;
+    }
+  }
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <!-- 搜索页面 -->
   <div>
     <!-- 顶部搜索框 -->
     <van-search
@@ -9,6 +10,7 @@
       placeholder="请输入搜索关键词"
       input-align="center"
     >
+      <!-- 点击返回上一页面 -->
       <template #left>
         <van-icon color="black" name="arrow-left" size="20" @click="goback()" />
       </template>
@@ -35,12 +37,11 @@
         <van-row type="flex" justify="space-between" align="center">
           <van-col span="5"><p>历史搜索</p> </van-col>
           <van-col span="4">
-            <van-button type="default" size="mini"  round @click="historyClear">
+            <van-button type="default" size="mini" round @click="historyClear">
               清除记录
             </van-button>
-            </van-col>
+          </van-col>
         </van-row>
-
         <ul>
           <li
             v-for="(item, index) in historyList"
@@ -80,7 +81,7 @@ export default {
     return {
       searchValue: "",
       hotList: [],
-      SingerList:[],
+      SingerList: [],
       MusicList: [],
       isshow: true,
       timer: null,
@@ -92,9 +93,9 @@ export default {
   async created() {
     // 获取热门搜索关键字
     const res = await hotSearchAPI();
-    console.log(res);
+    // console.log(res);
     this.hotList = res.data.result.hots;
-    console.log(this.hotList);
+    // console.log(this.hotList);
     // 检查是否有历史搜索记录
     if (localStorage.getItem("historyList") != null) {
       this.historyList = JSON.parse(localStorage.getItem("historyList"));
@@ -106,7 +107,6 @@ export default {
       this.$router.go(-1);
     },
     // 点击已有搜索关键字 直接搜索
-    
     async keySearch(keyword) {
       this.searchValue = keyword;
       // 搜索歌曲
@@ -120,10 +120,10 @@ export default {
         keywords: keyword,
       });
       // 搜索结果
-      console.log("歌曲搜索");
-      console.log(res);
-      console.log("歌手搜索");
-      console.log(singers);
+      // console.log("歌曲搜索");
+      // console.log(res);
+      // console.log("歌手搜索");
+      // console.log(singers);
       this.MusicList = res.data.result.songs;
       this.SingerList = singers.data.result.artists;
       // 显示搜索结果列表
@@ -142,10 +142,10 @@ export default {
       // console.log(this.historyList);
     },
     // 清除历史记录
-    historyClear(){
-        this.historyList=[];
-        localStorage.removeItem("historyList")
-      }
+    historyClear() {
+      this.historyList = [];
+      localStorage.removeItem("historyList");
+    },
   },
   watch: {
     searchValue(val) {
