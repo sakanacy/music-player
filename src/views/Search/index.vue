@@ -139,7 +139,7 @@ export default {
       this.historyList.unshift(keyword);
       localStorage.setItem("historyList", JSON.stringify(this.historyList));
       // 查看历史记录状态
-      // console.log(this.historyList);
+      console.log(this.historyList);
     },
     // 清除历史记录
     historyClear() {

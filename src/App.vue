@@ -3,7 +3,7 @@
   <div class="main">
     <router-view></router-view>
   </div>
-   
+   <!-- 底部播放器 -->
   <MinePlayer/>
 </div>
 

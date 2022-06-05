@@ -1,4 +1,5 @@
 <template>
+<!-- 用户页面，暂未实现 -->
   <div>
     <!-- 顶部用户信息界面 -->
     <div id="user-info">

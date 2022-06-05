@@ -69,6 +69,8 @@ export default {
       this.updateplayListIndex(0);
       this.updateIsPlay(true);
       this.isplayAll = true;
+      // console.log("播放全部")
+      // console.log(this.playList)
     },
   },
 };
